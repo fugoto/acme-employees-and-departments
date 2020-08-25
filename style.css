@@ -1,0 +1,31 @@
+* {
+    font-family: Verdana, Geneva, Tahoma, sans-serif
+}
+
+#depts {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-start;
+}
+
+.dept {
+    display: flex;
+    flex-direction: column;
+    flex-basis: calc(100%/6);
+    align-content: stretch;
+    align-items: stretch;
+    margin: 8px;
+    height: 2000px;
+    border-right: 2px solid black;
+}
+
+button {
+    margin: 8px
+}
+
+.emp {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
