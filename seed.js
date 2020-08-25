@@ -1,7 +1,7 @@
 const { Employees, Departments, db } = require ('./db')
 const faker = require('faker')
 
-//manual checking of unique here given errors - given we have specified unique condition on db, is there a better way of doing this?
+//manual checking of unique here given errors i was getting, but given we have specified unique condition on db, is there a better way of doing this? to cover in an office hour
 const seedDepartments = []
 const deptnames=[]
 while(seedDepartments.length<=5) {

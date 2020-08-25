@@ -22,14 +22,6 @@ app.get('/api',async (req,res,next) => {
         const departments = await Departments.findAll()
         const employees = await Employees.findAll()
         
-        // employees.forEach(employee => {
-        //     employee.update(
-        //         { departmentId: Math.floor(Math.random()* departments.length+1)}, 
-        //         {where: 
-        //             { departmentId: null } 
-        //         })
-        // })
-        
         const EmpDepts = await Departments.findAll({
             include: Employees
         })
