@@ -1,12 +1,17 @@
 const { Employees, Departments, db } = require ('./db')
 const faker = require('faker')
 
-
+//manual checking of unique here given errors - given we have specified unique condition on db, is there a better way of doing this?
 const seedDepartments = []
-for(let i = 1; i <= 5; i++) {
-    seedDepartments.push({
-        deptname: faker.commerce.department()
-    })
+const deptnames=[]
+while(seedDepartments.length<=5) {
+    const deptname = faker.commerce.department()
+    if(!deptnames.includes(deptname)) {
+        deptnames.push(deptname)
+        seedDepartments.push({
+            deptname
+          })
+    }
 }
 
 const seedEmployees = []
