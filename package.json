@@ -5,11 +5,9 @@
   "main": "index.js",
   "scripts": {
     "postinstall": "webpack",
-    "start:dev": "npm run start-server & npm run build-watch",
-    "start-server": "node server",
-    "build-watch": "webpack -w",
-    "start": "npm run start:dev",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack",
+    "build:dev": "npm run build -- --watch --mode development",
+    "start:dev": "nodemon server --ignore dist/ --ignore src/ & npm run build:dev"
   },
   "repository": {
     "type": "git",
