@@ -14,12 +14,10 @@ for(let i = 1; i <= 50; i++) {
     seedEmployees.push(
         {
             name: faker.name.firstName(),
-            // memberOf: seedDepartments[Math.floor(Math.random() * 5)]
             departmentId: Math.floor(Math.random()* seedDepartments.length+1)
         }
     )
 }
-console.log(seedEmployees)
 async function seed(){
     try{
         console.log('seeding database')

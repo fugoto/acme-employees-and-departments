@@ -53,7 +53,6 @@ app.get('/api/departments', async(req,res,next) => {
 
 app.delete('/api/employees/',async(req,res,next) => {
     const deleted = req.body.emp
-    console.log(deleted.id)
     await Employees.destroy({
         where: {
             id: deleted.id
@@ -62,31 +61,44 @@ app.delete('/api/employees/',async(req,res,next) => {
     res.send(await Employees.findAll())
 })
 
+app.delete('/api/departments',async(req,res,next)=> {
+    const deleted = req.body.dept
+    await Departments.destroy({
+        where: {
+            id: deleted.id
+        }
+    })
+    res.send(await Departments.findAll())
+})
+
 app.put('/api/employees/:id',async (req,res,next) => {
     try{
-        const removedId = req.params.id
-        const removed = await Employees.findOne({
+        const updatedId = req.params.id
+        const updated = await Employees.findOne({
             where: {
-                id: removedId
+                id: updatedId
             }
         })
         const departments = await Departments.findAll()
-      if(removed.departmentId) {
-        await removed.update(
+        
+      if(updated.departmentId) {
+        await updated.update(
             { departmentId: null },
             {
                 where: {
-                id: removedId
+                id: updatedId
             }
             }
         )
       }
       else {
-          await removed.update(
-            { departmentId: Math.floor(Math.random()* departments.length+1)},
+          console.log('null!')
+          console.log('length',departments.length)
+          await updated.update(
+            { departmentId: Math.floor(Math.random() * departments.length) + 1  },
             { 
                 where: {
-                    id: removedId
+                    id: updatedId
                 }
             }
         )
@@ -98,9 +110,15 @@ app.put('/api/employees/:id',async (req,res,next) => {
 app.post('/api/employees',async (req, res, next) => {
     try{
         const newEmployee = await Employees.create({name: faker.name.firstName()})
-        console.log('new',newEmployee)
         res.send(await Employees.findAll())
     } catch(err){ next(err) }
+})
+
+app.post('/api/departments',async(req,res,next) => {
+    try{
+        const newDepartment = await Departments.create( {deptname: faker.commerce.department()} )
+        res.send(await Departments.findAll())
+    } catch(error){ next(error) }
 })
 
 async function init(){
